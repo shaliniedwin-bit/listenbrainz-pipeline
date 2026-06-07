@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: dim_user
+    columns:
+      - name: user_sk
+        tests:
+          - unique
+          - not_null
+      - name: user_name
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_artist
+    columns:
+      - name: artist_sk
+        tests:
+          - unique
+          - not_null
+      - name: artist_name
+        tests:
+          - not_null
+
+  - name: dim_track
+    columns:
+      - name: track_sk
+        tests:
+          - unique
+          - not_null
+      - name: track_name
+        tests:
+          - not_null
+
+  - name: dim_date
+    columns:
+      - name: date_sk
+        tests:
+          - unique
+          - not_null
+      - name: listen_date
+        tests:
+          - not_null
+
+  - name: fact_listens
+    columns:
+      - name: listen_id
+        tests:
+          - unique
+          - not_null
+      - name: user_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_user')
+              field: user_sk
+      - name: artist_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_artist')
+              field: artist_sk
+      - name: track_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_track')
+              field: track_sk
+      - name: date_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk

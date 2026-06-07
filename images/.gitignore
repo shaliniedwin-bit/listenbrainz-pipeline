@@ -1,0 +1,13 @@
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Credentials — NEVER commit this!
+*.json
+service-account*.json

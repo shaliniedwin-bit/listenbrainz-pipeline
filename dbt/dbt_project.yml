@@ -1,0 +1,28 @@
+name: 'listenbrainz'
+version: '1.0.0'
+config-version: 2
+
+# This determines how dbt profiles connect to your bigquery database
+profile: 'listenbrainz'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+models:
+  listenbrainz:
+    staging:
+      +materialized: view
+      +schema: listenbrainz_staging    # change from 'staging'
+    marts:
+      +materialized: table
+      +schema: listenbrainz_dev        # change from 'marts'
+

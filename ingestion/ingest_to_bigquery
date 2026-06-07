@@ -1,0 +1,6 @@
+-- Raw listens ingestion from BigQuery public dataset
+CREATE OR REPLACE TABLE `bigdata-proj-496610.listenbrainz_raw.raw_listens` AS
+SELECT *
+FROM `bigquery-public-data.listenbrainz.listens`
+WHERE listened_at >= TIMESTAMP('2024-01-01')
+LIMIT 5000000;
